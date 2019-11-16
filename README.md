@@ -14,39 +14,39 @@ This project relies on the Express, Bootstrap, Mongoose frameworks.
 ## Models (a.k.a Schema)
 
 **projectSchema**: Information as pertaining to a project
-    title: {type: String, required: true, unique: true}
-    description: {type: String}
-    is_on_hold: {type: Boolean, default: false}
-    is_archived: {type: Boolean, default: false}
-    send_updates: {type: Boolean, default: false}
-    send_update_day: {type: Number, default: 2}
-    send_update_time: {type: Number, default: 9}
-    slackchannel: {type: String}
-    kickoff_date: {type: Date}
-    huboard_link: {type: String}
-    ghrepo: {type: String}
-    rdbiz_link: {type: String}
-    contacts: [contactSchema],
-    deliverables: [deliverableSchema]
+* title: {type: String, required: true, unique: true}
+* description: {type: String}
+* is_on_hold: {type: Boolean, default: false}
+* is_archived: {type: Boolean, default: false}
+* send_updates: {type: Boolean, default: false}
+* send_update_day: {type: Number, default: 2}
+* send_update_time: {type: Number, default: 9}
+* slackchannel: {type: String}
+* kickoff_date: {type: Date}
+* huboard_link: {type: String}
+* ghrepo: {type: String}
+* rdbiz_link: {type: String}
+* contacts: [contactSchema],
+* deliverables: [deliverableSchema]
     
 _**Note**_: The **send_update_day** and **send_update_time** fields are used to decide when contacts should get project
 updates.
     
 **deliverableSchema**: The task to be performed
-    asset: {type: String, required: true}
-    start_date: {type: Date}
-    due_date: {type: Date}
-    past_due: {type: Boolean, default: false}
-    is_delivered: {type: Boolean, default: false}
+* asset: {type: String, required: true}
+* start_date: {type: Date}
+* due_date: {type: Date}
+* past_due: {type: Boolean, default: false}
+* is_delivered: {type: Boolean, default: false}
 
 **contactSchema**: The contact for a given project
-    name: {type: String, required: true}
-    email: {type: String}
-    phone: {type: String}
-    skype: {type: String}
-    wechat: {type: String}
-    is_update_recipient: {type: Boolean, default: false}
-    update_method: {type: String, default: "email"}
+* name: {type: String, required: true}
+* email: {type: String}
+* phone: {type: String}
+* skype: {type: String}
+* wechat: {type: String}
+* is_update_recipient: {type: Boolean, default: false}
+* update_method: {type: String, default: "email"}
 
 _**Note**_: The **is_update_recipient** and **update_method** fields are used to distinguish which contacts should get project
 updates and in what format. This was not fully implemented as on the email method was operational.
