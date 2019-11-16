@@ -1,11 +1,14 @@
 Curtis's RD PM bot
 
-This is an old project that I used to learn NodeJS. 
+This is an old project that I used to learn NodeJS. It was implemented on ReignDesign (a company I had previously worked for)
+servers. When I left ReignDesign I was allowed to take the code since it was written by me to help with my project management 
+duties there.
 
-Basically this is a project management tool that allows the user to enter in project information and sends automated 
-project updates to Slack.
+Basically this is a project management tool that allows the user to enter in project information. That information is stored
+in a MongoDB database and the system autmatically checks to see which tasks in various projects are upcoming or overdue
+and sends automated messages to the teams working on those tasks via Slack.
 
-There are three main models:
+This project relies on the Express, Bootstrap, Mongoose frameworks.
 
 Posts daily at 10:15 into project chats
 
