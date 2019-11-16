@@ -1,5 +1,10 @@
 Curtis's RD PM bot
 
+This is an old project that I used to learn NodeJS. 
+
+Basically this is a project management tool that allows the user to enter in project information and sends automated 
+project updates to Slack.
+
 Posts daily at 10:15 into project chats
 
 To test this locally create a file called `.env` in the root and set properties for example:
