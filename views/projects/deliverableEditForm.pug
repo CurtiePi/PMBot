@@ -1,0 +1,34 @@
+extends ../layout
+  
+
+
+block content
+  h3 Edit Deliverable
+
+  form(name='deliverableEditForm').panel.addnew
+    .form-group
+      label(for='asset') Deliverable:
+      input#asset.form-control(type='text', value=deliverable.asset, name='asset')
+    
+    .form-group
+      label(for='start_date') Start Date:
+      input(type='text', name="start_date", value=deliverable.start_date, id='datepicker_start')
+    
+    .form-group
+      label(for='due_date') Due Date:
+      input(type='text', name="due_date", value=deliverable.due_date id='datepicker_due')
+    
+    .form-group
+      label(for='past_due') Past Due:
+      input#past_due.form-control(type='checkbox', name='past_due', checked=deliverable.past_due)
+    .form-group
+      label(for='is_delivered') Delivered:
+      input#is_delivered.form-control(type='checkbox', name='is_delivered' checked=deliverable.is_delivered)
+    .form-group
+      button.btn.btn-primary(type="button", onclick='update_deliverable("' + projectId + '-' + deliverable.id + '");') Update Deliverable
+
+
+  script.
+    var startPicker = new Pikaday({ field: document.getElementById('datepicker_start') });
+    var duePicker = new Pikaday({ field: document.getElementById('datepicker_due') });
+

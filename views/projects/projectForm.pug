@@ -1,0 +1,123 @@
+extends ../layout
+  
+
+block content
+
+  div(id='error_div' class='error_div' style='display: hidden')
+    span(id='error_msg')
+  form(name='projectForm')
+    .pull-right
+      if project
+        button.btn.btn-primary.protect_btn(type="button", onclick="update_project('"+  project.id + "');") Update Project
+      else
+        button.btn.btn-primary.protect_btn(type="button", onclick="add_project();") Add Project
+    h1
+      a(href='/') Home
+      |  > 
+      a(href='/projects') Projects
+      |  > 
+      if project 
+        a(href='/projects/'+project._id) #{project.title}
+        |  > 
+        | Edit
+      else
+        | #{title}
+    
+    .col-md-12
+      label(for='title') Title:
+      if project
+          input#title.form-control(type='text', value=project.title name='title')
+      else
+          input#title.form-control(type='text', placeholder='project title' name='title')
+      
+      br
+      label(for='description') Description:
+      if project
+          input#description.form-control(type='textarea', value=project.description name='description')
+      else
+          input#description.form-control(type='textarea', placeholder='project description' name='description')
+
+      .row
+        .col-md-2
+          label(for='kickoff_date') Start Date:
+          if project
+              input.form-control(type='text', placeholder='start date' name='kickoff_date', id='datepicker_kickoff')
+          else
+              input.form-control(type='text', placeholder='start date' name='kickoff_date', id='datepicker_kickoff')
+        .col-md-2
+          .form-group.padtop
+            label(for='is_on_hold') On Hold:
+            input#is_on_hold.form-control(type='checkbox', name='is_on_hold', checked=project && project.is_on_hold)
+       
+        .col-md-2
+          .form-group.padtop
+            label(for='is_archived') Archived:
+            if project
+                input#is_archived.form-control(type='checkbox', name='is_archived', checked=project.is_archived)
+            else
+                input#is_archived.form-control(type='checkbox', name='is_archived')
+   
+        .col-md-3
+          .form-group.padtop
+            label(for='send_updates') Send Updates:
+            if project
+                input#send_updates.form-control(type='checkbox', name='send_updates', checked=project.send_updates, onClick="showDateTime(this)")
+            else
+                input#send_updates.form-control(type='checkbox', name='send_updates')
+            
+            span(id='updateDateTime', style='visibility: hidden')
+              p Update Day and Time
+
+    .col-md-4
+      h3 References
+      label(for='huboard_link') Huboard Link:
+      if project
+          input#huboard_link.form-control(type='text', value=project.huboard_link name='huboard_link')
+      else
+          input#huboard_link.form-control(type='text', placeholder='huboard link' name='huboard_link')
+      br
+      label(for='ghrepo') Github Repository:
+      if project
+          input#ghrepo.form-control(type='text', value=project.ghrepo name='ghrepo')
+      else
+          input#ghrepo.form-control(type='text', placeholder='github repository' name='ghrepo')
+      br
+      label(for='rdbiz_link') RDBiz Link:
+      if project
+          input#rdbiz_link.form-control(type='text', value=project.rdbiz_link name='rdbiz_link')
+      else
+          input#rdbiz_link.form-control(type='text', placeholder='rdbiz link' name='rdbiz_link')
+
+      br
+      label(for='slackchannel') Slack Channel:
+      if project
+          input#slackchannel.form-control(type='text', value=project.slackchannel name='slackchannel')
+      else
+          input#slackchannel.form-control(type='text', placeholder='slack channel' name='slackchannel')
+      
+    .col-md-4
+      div 
+        include includes/contactForm.pug
+    .col-md-4
+      div    
+        include includes/deliverableForm.pug    
+    
+      
+      
+
+  if project
+    script.
+       var kickoff_datePicker = new Pikaday({ field: document.getElementById('datepicker_kickoff'), defaultDate: new Date('#{project.kickoff_date}'), setDefaultDate: true });
+       load_update_time(#{project.send_update_day}, #{project.send_update_time}, #{project.send_updates}, document.getElementById('updateDateTime'));
+  else
+    script.
+       var kickoff_datePicker = new Pikaday({ field: document.getElementById('datepicker_kickoff') });
+  script.
+    function showDateTime(checkObj) {
+      if(checkObj.checked) {
+        document.getElementById('updateDateTime').style.visibility = "visible";
+      }
+      else {
+        document.getElementById('updateDateTime').style.visibility = "hidden";
+      }    
+    }

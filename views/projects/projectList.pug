@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  h1
+    a(href='/') Home
+    |  > 
+    | Projects
+  if message
+    p= message
+  table.table
+    each project in projects 
+        tr
+          td
+            a(href='/projects/' + project.id)  #{project.title}
+          td
+            a(href='/projects/' + project.id + '/deliverables') See All Deliverables  
+          td
+            a(href='/projects/' + project.id + '/edit') Edit Project
+        br
+
+  p
+    a.btn.btn-primary(href='/projects/create/') Add New Project

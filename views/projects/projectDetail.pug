@@ -1,0 +1,62 @@
+extends ../layout
+block content
+  p.pull-right
+    a.btn.btn-primary(href='/projects/' + project.id + '/edit').protect_btn Edit Project
+
+  h1
+    a(href='/') Home
+    |  > 
+    a(href='/projects') Projects
+    |  >  
+    | #{project.title}
+
+  p= 'Description: ' + project.description
+  p= 'Start Date: ' + formatDateToReadable(project.kickoff_date)
+  if project.is_on_hold
+    p
+      b Project on Hold
+  if project.is_archived
+    p
+      b Project Archived
+  if project.send_updates
+    p
+      b Project Updates sent on 
+        span(id='dateAndTime') project.send_update_day at project.send_update_time
+  .col-md-4 
+    h3  References
+    if project.huboard_link != ""
+      a(href=project.huboard_link, target="_blank") Huboard
+      br
+    if project.ghrepo != ""
+      p Github Repository: #{project.ghrepo}
+      br
+    if project.rdbiz_link != ""
+      a(href=project.rdbiz_link, target="_blank") RDBiz
+      br
+    if project.slackchannel != ""
+      a(href='https://reigndesign.slack.com/messages/' + project.slackchannel, target="_blank") Slack Channel
+  .col-md-4
+    h3 Contacts
+    div(id='contactCards')
+    each contact in project.contacts
+      script.
+        load_contact("#{project.id}-#{contact.id}","#{contact.name}","#{contact.email}","#{contact.phone}","#{contact.skype}","#{contact.wechat}","#{contact.is_update_recipient}","#{contact.update_method}", false);
+  .col-md-4
+    h3 Deliverables
+    div(id='deliverableCards')
+   
+    
+    
+    - var cutoff_date = new Date();
+    - cutoff_date.setDate(cutoff_date.getDate() - 14);
+
+    each deliverable in project.deliverables
+      - var due_date = new Date(deliverable.due_date);
+
+      if due_date.getTime() >= cutoff_date.getTime() || !deliverable.is_delivered 
+        script.
+          load_deliverable("#{project.id}-#{deliverable.id}", "#{deliverable.asset}", "#{deliverable.start_date}", "#{deliverable.due_date}", #{deliverable.past_due}, #{deliverable.is_delivered}, false); 
+
+    if project.send_updates
+      script.
+        load_update_time_message(#{project.send_update_day}, #{project.send_update_time}, document.getElementById('dateAndTime'));

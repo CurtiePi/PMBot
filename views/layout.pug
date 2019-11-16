@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+  
+    title= title
+  
+    script(src="/components/jquery/dist/jquery.min.js")
+    script(src="/components/bootstrap/dist/js/bootstrap.min.js")  
+    script(src='/javascripts/utilities.js?2')
+    script(src='/javascripts/project_js.js')
+    script(src='/javascripts/pikaday.js')
+    
+    link(rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css")
+    link(rel='stylesheet', href='/stylesheets/main.css?2', type='text/css')
+    link(rel='stylesheet', href='/stylesheets/pikaday/pikaday.css', type='text/css')
+      
+  body
+    nav.navbar.navbar-default
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href="/") PMBot
+        ul.nav.navbar-nav
+          li
+            a#rdbiz_name
+    .container
+        block content
+    block scripts
+      script.
+          //protect();

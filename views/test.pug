@@ -1,0 +1,8 @@
+extends layout
+ 
+block content
+    h1= message
+  
+    p
+        a.btn.btn-danger(href="/projects/sendall" onclick="return confirm('Are you sure you want to send messages now?')") TEST: Send deliverables to all channels now
+

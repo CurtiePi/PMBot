@@ -1,0 +1,11 @@
+Curtis's RD PM bot
+
+Posts daily at 10:15 into project chats
+
+To test this locally create a file called `.env` in the root and set properties for example:
+
+```
+MONGODB_URI='mongodb://localhost:27017/rdshanghai'
+PORT=4444
+DEBUG_SLACK_CHANNEL='flummoxed'
+```

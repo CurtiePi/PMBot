@@ -1,0 +1,45 @@
+extends ../layout
+  
+
+
+block content
+  h3 Edit Contact 
+
+  form(name='contactEditForm').panel.addnew
+    .form-group
+      label(for='name') Add new contact:
+      input#name.form-control(type='text', placeholder='first and last name' name='name', value=contact.name)
+    .form-group
+      label(for='email') Email:
+      input#email.form-control(type='email', placeholder='name@email.com' name='email', value=contact.email)
+    .form-group
+      label(for='phone') Phone:
+      input#phone.form-control(type='text', placeholder='phone' name='phone', value=contact.phone)
+    .form-group
+      label(for='skype') Skype:
+      input#skype.form-control(type='text', placeholder='skype id' name='skype', value=contact.skype)
+    .form-group
+      label(for='wechat') WeChat:
+      input#wechat.form-control(type='text', placeholder='wechat id' name='wechat', value=contact.wechat)
+    .form-group
+      label(for='is_update_recipient') Get Updates:
+      input#is_recipient.form-control(type='checkbox', name='is_update_recipient', checked=contact.is_update_recipient)
+    .form-group
+      label(for='update_method') Update Method:   
+      select#update_method.select.form-control.input-med(name='update_method')
+        option(value='email') Email
+        option(value='basecamp') Basecamp
+    .form-group
+      button.btn.btn-primary(type="button", onclick='update_contact("' + projectId + '-' + contact.id + '");') Update Contact
+
+
+  script.
+    var um = document.contactEditForm.update_method;
+    var selectIndex = 0;
+    for(var idx=0; idx < um.options; idx++){
+      if ( um.options[idx].value == "#{contact.update_method}") {
+        selectIndex = idx;
+        break;
+      }
+    }
+    um.selectedIndex = selectIndex;

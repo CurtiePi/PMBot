@@ -1,0 +1,11 @@
+extends layout
+ 
+block content
+    h1 Unauthorized
+    p Please 
+        a#login(href="https://rdbiz.herokuapp.com/login?returnto=") log into RDBIZ 
+        |  then return here
+        
+block scripts
+    script.
+        $("#login").attr("href",$("#login").attr("href")+encodeURI(location.origin))
